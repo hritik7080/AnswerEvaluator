@@ -3,7 +3,7 @@
 
 <head>
   <title>Register</title>
-  <link rel='stylesheet' href='{% static 'css/form.css' %}'>
+  <!-- <link rel='stylesheet' href='{% static 'css/form.css' %}'> -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
 <!-- Optional theme -->
@@ -25,6 +25,23 @@
   width: 200px;
   height: 50px;
 }
+
+body{
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
 </style>
 </head>
 
@@ -33,36 +50,44 @@
   <div class='container1'>
     <div class='window'>
       <div class='overlay'></div>
-      <div class='content'>
-        <div class='welcome'>Register Yourself!</div>
-        <div class='subtitle'>Welcome to the examination protal</div>
+      <center>
+      <div class='content container jumbotron img-thumbnail img-rounded' style='margin-top: 100px; text-align:center;'>
+        <div class='welcome'><h2>Register Yourself!</h2></div>
+        <div class='subtitle'><p>Welcome to the examination protal</p></div>
         <div class="caution" style='text-align: center; padding: 10px; color: red;'>
           {% for message in messages %}
           {{message}}
           {% endfor %}
         </div>
-        <div class='input-fields'>
-          <form method='post' action='{% url 'register' %}'>
+        <div class='input-fields' >
+          <form method='post' action='{% url 'register' %}'  >
             {% csrf_token %}
-            <input type='text' placeholder='First Name' name='first_name' class='input-line full-width'></input>
-            <input type='text' placeholder='Last Name' name='last_name' class='input-line full-width'></input>
-            <input type='text' placeholder='Username' name='username' class='input-line full-width'></input>
-            <input type='email' placeholder='Email' name='email' class='input-line full-width'></input>
-            <input type='password' placeholder='Password' name='password1' class='input-line full-width'></input>
-            <input type='password' placeholder='Re-Password' name='password2' class='input-line full-width'></input>
-            <input type='text' placeholder='Roll No.' name='roll_no' class='input-line full-width'></input>
-            <input type='text' placeholder='College Name' name='college_name' class='input-line full-width'></input>
-            <input type='text' placeholder='Branch' name='branch' class='input-line full-width'></input>
-            <input type='text' placeholder='Semester' name='semester' class='input-line full-width'></input>
-            <input type='date' placeholder='Date of Birth' name='dob' class='input-line full-width'></input>
-            <input type='text' placeholder='Subject Code' name='subject_code' class='input-line full-width'></input>
-            <div><input type='submit' class='ghost-round full-width'></input></div>
+            <div style='display:flex; justify-content: space-evenly;'>
+            <div style='flex: .4;'>
+            <input type='text' placeholder='First Name' name='first_name' class='form-group form-control'></input>
+            <input type='text' placeholder='Last Name' name='last_name' class='form-group form-control'></input>
+            <input type='text' placeholder='Username' name='username' class='form-group form-control'></input>
+            <input type='email' placeholder='Email' name='email' class='form-group form-control'></input>
+            <input type='password' placeholder='Password' name='password1' class='form-group form-control'></input>
+            <input type='password' placeholder='Re-Password' name='password2' class='form-group form-control'></input>
+          </div>
+          <div style='flex: .4;'>
+            <input type='text' placeholder='Roll No.' name='roll_no' class='form-group form-control'></input>
+            <input type='text' placeholder='College Name' name='college_name' class='form-group form-control'></input>
+            <input type='text' placeholder='Branch' name='branch' class='form-group form-control'></input>
+            <input type='text' placeholder='Semester' name='semester' class='form-group form-control'></input>
+            <input type='date' placeholder='Date of Birth' name='dob' class='form-group form-control'></input>
+            <input type='text' placeholder='Subject Code' name='subject_code' class='form-group form-control'></input>
+          </div>
+        </div>
+          <div><input type='submit' class='ghost-round full-width btn btn-primary'</input></div>
           </form>
 
         </div>
 
 
       </div>
+      </center>
     </div>
   </div>
 <div class="links">
