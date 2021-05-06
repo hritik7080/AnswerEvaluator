@@ -75,21 +75,21 @@ import matplotlib.pyplot as plt
 
 def evaluateView(request):
     
-    # import tensorflow_hub as hub
-    # import numpy as np
+    import tensorflow_hub as hub
+    import numpy as np
 
-    # import tensorflow as tf
+    import tensorflow as tf
 
-    # module_url = "https://tfhub.dev/google/universal-sentence-encoder/1?tf-hub-format=compressed"
+    module_url = "https://tfhub.dev/google/universal-sentence-encoder/1?tf-hub-format=compressed"
 
-    # embed = hub.Module(module_url)
+    embed = hub.Module(module_url)
 
 
     test = models.Test.objects.get(id=request.session['test'])
 
     questions = pd.read_csv(f"./media/{test.questions.name}")
     indexes = questions['Index']
-
+    marks = []
     for i in indexes:
         answer = questions[questions['Index']==i]['Answer']
         print(str(answer[i-1]))
@@ -110,24 +110,24 @@ def evaluateView(request):
         answer = ' '.join(answer)
         givenAnswser = ' '.join(newGiven)
 
-        marks = []
+        
         
         sentences=[answer, givenAnswser]
         print(sentences)
-        # similarity_input_placeholder = tf.placeholder(tf.string, shape=(None))
-        # similarity_message_encodings = embed(similarity_input_placeholder)
-        # with tf.Session() as session:
-        #     session.run(tf.global_variables_initializer())
-        #     session.run(tf.tables_initializer())
-        #     message_embeddings_ = session.run(similarity_message_encodings, feed_dict={similarity_input_placeholder: sentences})
+        similarity_input_placeholder = tf.placeholder(tf.string, shape=(None))
+        similarity_message_encodings = embed(similarity_input_placeholder)
+        with tf.Session() as session:
+            session.run(tf.global_variables_initializer())
+            session.run(tf.tables_initializer())
+            message_embeddings_ = session.run(similarity_message_encodings, feed_dict={similarity_input_placeholder: sentences})
 
-        #     corr = np.inner(message_embeddings_, message_embeddings_)
-        #     print(corr)
-        #     marks.append(corr[0][1])
+            corr = np.inner(message_embeddings_, message_embeddings_)
+            print(corr)
+            marks.append(corr[0][1])
 
-    marks=[.5, .9]
+    # marks=[.5, .9]
 
-    marksF = [float(i)*100 for i in marks]
+    marksF = [round(float(i)*100, 2) for i in marks]
     print(marks)
     print(marksF)
 
