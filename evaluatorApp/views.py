@@ -59,7 +59,7 @@ def testView(request, id):
     ques=  model['Question']
     request.session['test'] = obj.id
 
-    return render(request, 'test.html', context={'objects': dict(zip(_id, ques)).items(), 'time': obj.end_time})
+    return render(request, 'test.html', context={'objects': dict(zip(_id, ques)).items(), 'time': obj.end_time, 'test_id': obj.id})
 
 def availableTestView(request):
     objects = list(models.Test.objects.all())
